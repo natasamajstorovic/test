@@ -8,17 +8,18 @@
 </head>
 
 <body>
+	
 	<div class="header" id="header">
 		<h1 class="navbar-inner">HEADER</h1>
 	</div>
 	
 	<div class="wrapper navbar navbar-inner">
 		<h1 class="underlined">LOGOVANJE</h1>
-		<input type="button"  id="mybutton" value="Click Me"></input>
+		
 		<p class="serif">Unesite podatke</p>
 		{{ Form::open(array(
 				 'route'=>'zavrseno',
-				'method' => 'POST',
+				 'method' => 'POST',
 		)) }}
 		{{ Form::label('usernamelbl', Lang::get('logovanje.username')) }}<br>
 		{{ Form::text('username', '') }}<br>

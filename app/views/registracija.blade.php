@@ -8,59 +8,54 @@ Confirme password: <input type="text" name="password_confirmation">
 </form> -->
 
 <head>
-<script src="/jquery/lib/jquery.js"></script>
-<script src="/jquery/dist/jquery.validate.js"></script>
-<script src="/jquery/dist/jquery.validate.min.js" type="text/javascript"></script>
 
 {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');}}
+{{HTML::script('/jquery/dist/jquery.validate.js')}}
+
+
 
 <script type="text/javascript" language="javascript">
- 
+
     $(document).ready(function () {
-    
-     	//$("#validacijaFrm").validate({
-     		
-//     		rules:{
-    			
-//    			     username: {
-//    			         required: true,
-//    			       	 email: true
-   			      	
-//    			     },
-//    			     name:{
-//    	   			     required: true, 	   				
-//    			     },
-//    			     lastn:{
-//    	   			     required: true,
-//    			     },
-//    			  	password:
-//    			     {
-//    	   			     required: true,
-//    	   				minlength: 7,	
-//    			     }
-   			     
-//    			},
-//    			 messages:{
-   				   
-//    					username: {
-//    				         required: "ovo polje je zahteveano",
-//    				         email: "Email adrese su u formi user@host"
-//    				     },  
-// 			     	name:{
-// 				     	required: "zahtevano polje!",
+   
+    	$("#validacijaFrm").validate({
+        	rules:{
+    		  username: {
+			         required: true,
+			       	 email: true
+			      	
+			     },
+			     name:{
+	   			     required: true 	   				
+			     },
+			     lastn:{
+	   			     required: true
+			     },
+			  	password:
+			     {
+	   			     required: true,
+	   				minlength: 7	
+			     }			     
+			},
+			 messages:{
+				   
+					username: {
+				         required: "ovo polje je zahteveano",
+				         email: "Email adrese su u formi user@host"
+				     },  
+			     	name:{
+				     	required: "zahtevano polje!"
 				     	
-// 			     	},
-// 			     	lastn:{
-// 				     	required: "zahtevano polje"
-// 			     	},
-// 			     	password:{
-// 				     	required: "zahtevano polje",
-// 				     	minlength: "mora minimim biti 7 karaktera"
-// 			     	} 				    
-//    				//}
-//
-         //	});	
-    	      
+			     	},
+			     	lastn:{
+				     	required: "zahtevano polje"
+			     	},
+			     	password:{
+				     	required: "zahtevano polje",
+				     	minlength: "mora minimim biti 7 karaktera"
+			     	} 				    
+				}       
+   		 });     	      
     });
 </script>
 </head>
@@ -82,6 +77,5 @@ Confirme password: <input type="text" name="password_confirmation">
 		{{ Form::label('cpasslbl', 'confirme pasword') }}<br>
 		{{ Form::password('password_confirmation') }}<br>
 		{{ Form::submit('register') }}
-		{{ Form::button('btnValidate',array('id'=>'btnValidate')) }}
 		{{ Form::close() }}
 	</body>

@@ -22,7 +22,7 @@
               </div>
             </div>
 
-<input type="button" onclick="myFunction()" id="mybutton" value="Click Me"></input>
+<input type="button" onclick="myFunction()" id="mybuttonscript" value="Click Me"></input>
 
 </body>
 </html>

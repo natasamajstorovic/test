@@ -53,8 +53,12 @@ class AccountController extends BaseController
 			
 			if (Auth::attempt(array('username'=>$user['username'],'password'=>$user['password'],'active'=>1))) {
 				
-				
-				return View::make('zavrseno', array('user' => $user));
+				$userRow = DB::table('korisnici')->where('username', $user['username'])->first();
+				$logedUser = array(
+						'name' => $userRow->name,
+						'surname' => $userRow->surname
+				);
+				return View::make('zavrseno', array('user' => $logedUser));
 		
 			}
 			
@@ -86,6 +90,8 @@ class AccountController extends BaseController
 			$noviUser=new User;
 			$noviUser->username=$user['username'];
 			$noviUser->password=$passwordNew;
+			$noviUser->name=$user['name'];
+			$noviUser->surname =$user['lastn'];
 			$noviUser->activation_key=$activation_key;
 			$noviUser->active=false;
 			$noviUser->save();
@@ -94,7 +100,7 @@ class AccountController extends BaseController
 			$email = $user['username'];
 			
 			Mail::send('emails.welcome', array('data' => $user,'key'=>$activation_key,'email'=>$user['username']), function ($message) use($email){
-	    		$message->subject('Message Subject');
+	    		$message->subject('Activation mail');
 	    		$message->from('mail@gmail.com', 'Natasa');
 	    		$message->to($email); // Recipient address
 			});
@@ -109,7 +115,7 @@ class AccountController extends BaseController
 	{
 		$email = $_GET['email'];
 		$key=$_GET['key'];
-		$mysqli=new mysqli("localhost", "root", "madrabbit13","bazaKorisnika");
+		$mysqli=new mysqli("localhost", "root", "password","bazaKorisnika");
 		if(mysqli_connect_errno())
 		{
 			printf("connect failed: %s", mysqli_connect_error());

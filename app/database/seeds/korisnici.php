@@ -3,7 +3,9 @@
 
 return array(
 		array(
-				'username' => 'max',
-				'password' => Hash::make('my_pass')
+				'username' => 'natasa@yahoo.com',
+				'password' => Hash::make('my_pass'),
+				'name'=>'natasa',
+				'surname'=>'majstorovic'
 		),
 );

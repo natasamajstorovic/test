@@ -4,8 +4,9 @@ return array(
 
 'username'=>'username',
 'password'=>'password',
-'login'=>'login'
-
+'login'=>'login',
+'unesiteLbl'=> 'Insert your data',
+'registracija'=>'REGISTRATION'
 
 );
 

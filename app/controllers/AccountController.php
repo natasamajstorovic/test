@@ -49,8 +49,7 @@ class AccountController extends BaseController
 		$validator = Validator::make($user, $rules);
 		if($validator->passes())
 		{
-			
-			
+						
 			if (Auth::attempt(array('username'=>$user['username'],'password'=>$user['password'],'active'=>1))) {
 				
 				$userRow = DB::table('korisnici')->where('username', $user['username'])->first();
@@ -61,12 +60,11 @@ class AccountController extends BaseController
 				return View::make('zavrseno', array('user' => $logedUser));
 		
 			}
-			
-								
+											
 		}
-		
-		
-			return Redirect::to('login');}
+				
+			return Redirect::to('login');
+	}
 		
 
 	
@@ -76,7 +74,7 @@ class AccountController extends BaseController
 		$user = Input::all();
 		$rules=array(
 				'password'=>array('required','confirmed','min:6'),
-				'username'=>'required','email',
+				'username'=>arrray('required','email','unique:korisnici,username'),
 				'name'=>'alpha_num',
 				'lastn'=>'alpha_num'
 		);
@@ -101,7 +99,7 @@ class AccountController extends BaseController
 			
 			Mail::send('emails.welcome', array('data' => $user,'key'=>$activation_key,'email'=>$user['username']), function ($message) use($email){
 	    		$message->subject('Activation mail');
-	    		$message->from('mail@gmail.com', 'Natasa');
+	    		
 	    		$message->to($email); // Recipient address
 			});
 			
@@ -113,26 +111,21 @@ class AccountController extends BaseController
 	
 	public function acitvateAccount()
 	{
+		
 		$email = $_GET['email'];
 		$key=$_GET['key'];
-		$mysqli=new mysqli("localhost", "root", "password","bazaKorisnika");
-		if(mysqli_connect_errno())
-		{
-			printf("connect failed: %s", mysqli_connect_error());
-			exit();
-		}
-		//$result=$mysqli->query("SELECT id FROM korisnici WHERE username='natasa.m@uns.ac.rs' and activation_key='636049f6f17142bdebfbd77c9a1ba8933ebcd4cebf1a90d66784d26c9a399061'");
-																													
-		$result = $mysqli->query("SELECT id FROM korisnici WHERE username='$email' and activation_key='$key'");
+				
+	
+		$user = User::where('username', '=', $email)
+		->where('activation_key', '=', $key)
+		->where('active', '=',0)->first();
 		
-		if($mysqli->affected_rows==1)
-			$mysqli->query("UPDATE korisnici SET active='1' WHERE korisnici.username='$email' and korisnici.activation_key='$key'");
-			
-		//$mysqli->close();
-		
-		return Redirect::to('login');
-		
-		
-		
+		                   
+         if ($user!=NULL)          
+         {
+         	$user->active=1;       	
+         }
+																											
+         Redirect::to('login');
 	}
 }

@@ -8,10 +8,11 @@ Confirme password: <input type="text" name="password_confirmation">
 </form> -->
 
 <head>
-
+{{HTML::style('Stilovi.css');}}
 {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');}}
 {{HTML::script('/jquery/dist/jquery.validate.js')}}
-
+<link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+	<script src="/js/bootstrap.js"></script>
 
 
 <script type="text/javascript" language="javascript">
@@ -56,26 +57,56 @@ Confirme password: <input type="text" name="password_confirmation">
 			     	} 				    
 				}       
    		 });     	      
-    });
-</script>
+  	  });
+	</script>
+	<style type="text/css">
+		 body {
+	        padding-top: 20px;
+	        padding-bottom: 40px;
+	        
+	      }
+	      /* Custom container */
+	      .container-narrow {
+	        margin: 0 auto;
+	        max-width: 700px;
+	        
+	      }
+	   	 
+	 </style>
 </head>
 <body>
-{{ Form::open(array(
+<div class="container-narrow">
+<div class="text-center">
+		{{ Form::open(array(
 				'route'=>'registrovan',
 				'method' => 'POST',
 				'id'=>'validacijaFrm'
 		))}}
+		<div class="header" id="header">
+				<h1>REGISTRATION</h1></div>
+  
 		
-		{{ Form::label('emaillbl', 'Email') }}<br>
-		{{ Form::text('username', '',array('id'=>'username')) }}<br>
-		{{ Form::label('imelbl', 'Name') }}<br>
-		{{ Form::text('name', '',array('id'=>'name'))}}<br>
-		{{ Form::label('prezimelbl', 'Last name') }}<br>
-		{{ Form::text('lastn', '',array('id'=>'lastn')) }}<br>
-		{{ Form::label('passwordlbl', 'pasword') }}<br>
-		{{ Form::password('password',array('id'=>'password'))}}<br>
-		{{ Form::label('cpasslbl', 'confirme pasword') }}<br>
+		{{ Form::label('emaillbl', 'Email') }}
+		{{ Form::text('username', '',array('id'=>'username')) }}
+		{{ Form::label('imelbl', 'Name') }}
+		{{ Form::text('name', '',array('id'=>'name'))}}
+		{{ Form::label('prezimelbl', 'Last name') }}
+		{{ Form::text('lastn', '',array('id'=>'lastn')) }}
+		{{ Form::label('passwordlbl', 'pasword') }}
+		{{ Form::password('password',array('id'=>'password'))}}
+		{{ Form::label('cpasslbl', 'confirme pasword') }}
 		{{ Form::password('password_confirmation') }}<br>
 		{{ Form::submit('register') }}
 		{{ Form::close() }}
-	</body>
+		<div class="push"></div>
+	
+	</div>
+		
+	<div class="footer navbar-inner">
+		<li class="nav-header">FOOTER</li>
+   		<li class="active"><a href="#header">pocetak</a></li></div>
+    			   
+		
+		</div>
+		
+</body>

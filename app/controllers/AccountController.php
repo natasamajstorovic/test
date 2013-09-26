@@ -74,7 +74,7 @@ class AccountController extends BaseController
 		$user = Input::all();
 		$rules=array(
 				'password'=>array('required','confirmed','min:6'),
-				'username'=>arrray('required','email','unique:korisnici,username'),
+				'username'=>array('required','email','unique:korisnici,username'),
 				'name'=>'alpha_num',
 				'lastn'=>'alpha_num'
 		);

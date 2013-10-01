@@ -25,7 +25,10 @@
 
 	
 	<div class="container-narrow">
-
+			 @if (Session::has('login_errors'))
+        		<span class="error">Username or password incorrect.</span>
+    		@endif
+    
 			{{ Form::open(array(
 					 'route'=>'zavrseno',
 					 'method' => 'POST',

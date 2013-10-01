@@ -38,7 +38,7 @@ class AccountController extends BaseController
 	
 	public function uspesnoUlogovan()
 	{
-		$user = array(
+		$input = array(
 				'username' => Input::get('username'),
 				'password' => Input::get('password')
 		);
@@ -46,28 +46,22 @@ class AccountController extends BaseController
 		//$rules = array('username'=> 'alpha_num|min:3');
 		$rules = array('password'=>array('min:3'));
 		//instanca validatora
-		$validator = Validator::make($user, $rules);
+		$validator = Validator::make($input, $rules);
 		if($validator->passes())
 		{
 						
-			if (Auth::attempt(array('username'=>$user['username'],'password'=>$user['password'],'active'=>1))) {
-				
-				$userRow = DB::table('korisnici')->where('username', $user['username'])->first();
-				$logedUser = array(
-						'name' => $userRow->name,
-						'surname' => $userRow->surname
-				);
-				return View::make('zavrseno', array('user' => $logedUser));
+			if (Auth::attempt(array('username'=>$input['username'],'password'=>$input['password'],'active'=>1))) {
+					$user = User::where('username', '=', $input['username'])->first();
+					return View::make('zavrseno', array('user'=>$user));
 		
 			}
 											
 		}
-				
-			return Redirect::to('login');
+		
+		
+			return Redirect::to('login')->with('login_errors', true);
 	}
 		
-
-	
 	public function uspesnoRegistrovan()
 	{
 		
@@ -87,6 +81,7 @@ class AccountController extends BaseController
 			$passwordNew = Hash::make($user['password']);			
 			$noviUser=new User;
 			$noviUser->username=$user['username'];
+			
 			$noviUser->password=$passwordNew;
 			$noviUser->name=$user['name'];
 			$noviUser->surname =$user['lastn'];
@@ -106,7 +101,9 @@ class AccountController extends BaseController
 			
 			return View::make('poslatAktMail',array('user'=>$user));
 		}
-		return Redirect::to('registracija');
+		$messages = $validator->messages();
+		
+		return Redirect::to('registracija')->with('errors',$messages);
 	}
 	
 	public function acitvateAccount()
@@ -123,7 +120,9 @@ class AccountController extends BaseController
 		                   
          if ($user!=NULL)          
          {
-         	$user->active=1;       	
+         	$user->active=1;   
+         	$user->save(); 
+         	  	
          }
 																											
          Redirect::to('login');

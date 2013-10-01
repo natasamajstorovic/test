@@ -77,6 +77,20 @@ Confirme password: <input type="text" name="password_confirmation">
 <body>
 <div class="container-narrow">
 <div class="text-center">
+
+
+ @if ( $errors->count() > 0 )
+      <p>The following errors have occurred:</p>
+
+      <ul>
+        @foreach( $errors->all() as $message )
+          <li>{{ $message }}</li>
+        @endforeach
+      </ul>
+    @endif
+
+
+
 		{{ Form::open(array(
 				'route'=>'registrovan',
 				'method' => 'POST',

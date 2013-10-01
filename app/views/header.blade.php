@@ -8,7 +8,7 @@
 	  <div class="btn-group ">
 	  	 <input type="button"  id="mybutton" value="projekat"></input> <br>		 
 		  <button class="btn btn-default btn-lg dropdown-toggle navbar-inner" type="button" data-toggle="dropdown">
-		    	{{$user['name']}} {{$user['surname']}}<span class="caret"></span>
+		    	{{$user->name}} {{$user->lastn}}<span class="caret"></span>
 		  </button>
 		   <ul class="dropdown-menu" role="menu">
 			    <li><a href="{{ URL::to('logout') }}">logout</a></li>

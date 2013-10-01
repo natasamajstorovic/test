@@ -40,6 +40,10 @@ Route::get('home',function()
 	return View::make('home');
 });
 
+Route::get('/{any}', function()
+{
+	return Redirect::to('home');
+});
 Route::get('/', function()
 {
 	return Redirect::to('home');
